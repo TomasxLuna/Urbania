@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login_registres.css">
+    <title>Wireframe - Login y Registro</title>
+
+</head>
+
+<body>
+
+        <div class="auth-shell">
+    <section class="auth-hero">
+        <div class="brand">
+  <span class="brand-mark">
+    <img src="img/logo-urbania.png" alt="Logo de Urbania">
+  </span>
+  <span>Urbania</span>
+</div>
+        <h1>Gestiona tu vivienda y beneficios aqui.</h1>
+        <p>Aplicacion web para organizar tareas diarias, establecer prioridades, dar seguimiento y mejorar la productividad personal.</p>
+        <div class="auth-points">
+        <div class="auth-point">Registro e inicio de sesion por usuario.</div>
+        <div class="auth-point">Cada usuario visualiza unicamente sus tareas.</div>
+        <div class="auth-point">Dashboard, filtros, prioridades, categorias y recordatorios simples.</div>
+        </div>
+
+    </section>
+        <section class="auth-card-wrap">
+        <div class="card auth-card">
+        <div class="brand"><span class="brand-mark">URB</span><span>Urbania</span></div>
+        <h2 class="page-title">Iniciar sesion</h2>
+        <p class="page-subtitle">Ingresa con tu cuenta.</p>
+        <div id="formAlert" class="alert"></div>
+        <form id="loginForm" class="form-grid">
+        <div class="field">
+            <label for="email">Correo</label>
+            <input id="email" name="email" type="email" placeholder="usuario@correo.com" required>
+        </div>
+
+        <div class="field">
+            <label for="password">Contrasena</label>
+            <input id="password" name="password" type="password" placeholder="Ingresa tu contrasena" required>
+            
+      
+        </div>
+
+        <button class="button full" type="submit">Ingresar</button>
+        </form>
+
+        <p class="auth-links">No tienes cuenta? <a href="register.html">Registrate aqui</a></p>
+
+
+<!-- NUEVO: Contenedor del enlace -->
+<div class="auth-links">
+    <a href="olvide_contraseña.html" class="auth-links">¿Olvidaste tu contraseña?</a>
+</div>
+
+    </section>
+
+    </div>
+<script>
+    // Obtener el formulario
+const loginForm = document.getElementById("loginForm");
+
+// Obtener los campos
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+
+// Obtener el contenedor de mensajes
+const formAlert = document.getElementById("formAlert");
+
+// Evento cuando se envía el formulario
+loginForm.addEventListener("submit", function (event) {
+
+    // Evita que la página se recargue
+    event.preventDefault();
+
+    // Obtener los valores escritos
+    const correo = email.value.trim();
+    const contrasena = password.value.trim();
+
+    // Limpiar mensaje anterior
+    formAlert.textContent = "";
+    formAlert.className = "alert";
+
+    // Validar correo vacío
+    if (correo === "") {
+        mostrarError("Por favor, ingresa tu correo.");
+        email.focus();
+        return;
+    }
+
+    // Validar formato del correo
+    const correoValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!correoValido.test(correo)) {
+        mostrarError("Por favor, ingresa un correo válido.");
+        email.focus();
+        return;
+    }
+
+    // Validar contraseña vacía
+    if (contrasena === "") {
+        mostrarError("Por favor, ingresa tu contraseña.");
+        password.focus();
+        return;
+    }
+
+    // Validar longitud de contraseña
+    if (contrasena.length < 6) {
+        mostrarError("La contraseña debe tener mínimo 6 caracteres.");
+        password.focus();
+        return;
+    }
+
+    // Si todo está correcto
+    mostrarExito("Inicio de sesión correcto.");
+
+    // Simular inicio de sesión
+    setTimeout(function () {
+        window.location.href = "dashboard.html";
+    }, 1500);
+});
+
+
+// Función para mostrar errores
+function mostrarError(mensaje) {
+
+    formAlert.textContent = mensaje;
+    formAlert.className = "alert error";
+}
+
+
+// Función para mostrar mensaje de éxito
+function mostrarExito(mensaje) {
+
+    formAlert.textContent = mensaje;
+    formAlert.className = "alert success";
+}
+</script>
+</body>
+</html> 
